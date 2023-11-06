@@ -17,7 +17,7 @@ screen.onkey(key="Left", fun=snake.left)
 screen.onkey(key="Right", fun=snake.right)
 
 DIFFICULTIES = {"Sonic": 0.04, "Hard": 0.07, "Normal": 0.1, "Easy": 0.15, "Baby": 0.2}
-SPEED = DIFFICULTIES["Normal"]
+SPEED = DIFFICULTIES["Hard"]
 game_is_on = True
 while game_is_on:
     screen.update()
