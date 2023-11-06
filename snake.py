@@ -1,11 +1,13 @@
 from turtle import Turtle
 
 MOVE_DISTANCE = 20
+DIRECTIONS = {"UP": 90, "LEFT": 180, "RIGHT": 0, "DOWN":270}
 
 class Snake:
     def __init__(self, color="green", starting_segments=3) -> None:
         self.segments = []
         self.create_snake(color=color, starting_segments=starting_segments)
+        self.head = self.segments[0]
     
     def create_snake(self, color="green", starting_segments=3):
         for index in range(starting_segments):
@@ -20,16 +22,20 @@ class Snake:
             #Coordinates of the segment in front
             new_x, new_y = self.segments[index-1].xcor(), self.segments[index-1].ycor()
             self.segments[index].goto(x=new_x, y=new_y)
-        self.segments[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
 
     def up(self):
-        self.segments[0].setheading(90)
+        if self.head.heading() == DIRECTIONS["DOWN"]: return
+        self.head.setheading(DIRECTIONS["UP"])
     
     def left(self):
-        self.segments[0].setheading(180)
+        if self.head.heading() == DIRECTIONS["RIGHT"]: return
+        self.head.setheading(DIRECTIONS["LEFT"])
 
     def down(self):
-        self.segments[0].setheading(270)
+        if self.head.heading() == DIRECTIONS["UP"]: return
+        self.head.setheading(DIRECTIONS["DOWN"])
 
     def right(self):
-        self.segments[0].setheading(0)
+        if self.head.heading() == DIRECTIONS["LEFT"]: return
+        self.head.setheading(DIRECTIONS["RIGHT"])
