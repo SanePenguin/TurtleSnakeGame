@@ -7,6 +7,7 @@ class Snake:
     def __init__(self, color="green", starting_segments=3) -> None:
         self.segments = []
         self.create_snake(color=color, starting_segments=starting_segments)
+        self.color = color
         self.head = self.segments[0]
     
     def create_snake(self, color="green", starting_segments=3):
@@ -39,3 +40,11 @@ class Snake:
     def right(self):
         if self.head.heading() == DIRECTIONS["LEFT"]: return
         self.head.setheading(DIRECTIONS["RIGHT"])
+
+    def grow(self):
+        new_segment = Turtle("square")
+        new_segment.color(self.color)
+        new_segment.penup()
+        new_segment.setx(self.segments[-1].xcor())
+        new_segment.sety(self.segments[-1].ycor())
+        self.segments.append(new_segment)
