@@ -1,6 +1,7 @@
 from turtle import Screen
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -19,6 +20,7 @@ screen.onkey(key="Left", fun=snake.left)
 screen.onkey(key="Right", fun=snake.right)
 
 food = Food(screen_size)
+scoreboard = Scoreboard(height=screen_size[0]//2 -40)
 
 DIFFICULTIES = {"Sonic": 0.04, "Hard": 0.07, "Normal": 0.1, "Easy": 0.15, "Baby": 0.2}
 SPEED = DIFFICULTIES["Hard"]
@@ -30,6 +32,7 @@ while game_is_on:
     time.sleep(SPEED)
     if snake.head.distance(food) < 15:
         food.spawn_random(screen_size[0], screen_size[1])
-        snake.grow()
+        #snake.grow()
+        scoreboard.increase_score()
 
 screen.exitonclick()
